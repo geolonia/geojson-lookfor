@@ -5,7 +5,8 @@
         "type": "Feature",
         "properties": {
           "name": "スイーツショップ",
-          "address": "△△"
+          "address": "埼玉県桶川市川田谷",
+          "category": "スイーツ"
         },
         "geometry": {
           "coordinates": [
@@ -19,7 +20,8 @@
         "type": "Feature",
         "properties": {
           "name": "樋口書店",
-          "address": "△△"
+          "address": "埼玉県入間郡越生町大字西和田",
+          "category": "書店"
         },
         "geometry": {
           "coordinates": [
@@ -34,7 +36,8 @@
         "type": "Feature",
         "properties": {
           "name": "菓子店",
-          "address": "△△"
+          "address": "埼玉県川越市中老袋",
+          "category": "スイーツ"
         },
         "geometry": {
           "coordinates": [
@@ -48,12 +51,43 @@
         "type": "Feature",
         "properties": {
           "name": "電気店",
-          "address": "△△"
+          "address": "埼玉県さいたま市見沼区大字蓮沼",
+          "category": "家電"
         },
         "geometry": {
           "coordinates": [
             139.65389691240966,
             35.933316420262145
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "パティスリーGeolonia",
+          "address": "埼玉県上尾市弁財二丁目",
+          "category": "スイーツ"
+        },
+        "geometry": {
+          "coordinates": [
+            139.57772266590507,
+            35.97221769999193
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "パティスリーぷりこ",
+          "address": "埼玉県上尾市中分三丁目",
+          "category": "スイーツ"
+        },
+        "geometry": {
+          "coordinates": [
+            139.54952061301026,
+            35.978737345548765
           ],
           "type": "Point"
         }
