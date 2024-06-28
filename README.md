@@ -1,0 +1,2 @@
+# geojson-lookup
+GeoJSON中にある地物(feature)を任意のキーワードで検索し、マッチした地物だけが含まれるGeoJsonを返すnpmモジュールです。
