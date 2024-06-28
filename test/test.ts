@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import * as fs from 'fs';
-import GeoJsonLookup from '../src/index';
+import GeoJsonlookfor from '../src/index';
 
 // このファイルのディレクトリ名を取得する
 const geojson = JSON.parse(fs.readFileSync(`${__dirname}/test.geojson`, 'utf8'));
@@ -15,9 +15,9 @@ describe('The first test', () => {
     });
 
     // スイーツショップを検索する
-    it('should be lookup sweetsshop.', () => {
-        const gl = new GeoJsonLookup(geojson); 
-        const res1 = gl.lookup('スイーツショップ');
+    it('should be lookfor sweetsshop.', () => {
+        const gl = new GeoJsonlookfor(geojson); 
+        const res1 = gl.lookfor('スイーツショップ');
         assert.deepEqual( {
             "type": "FeatureCollection",
             "features": [
@@ -39,7 +39,7 @@ describe('The first test', () => {
             ]
         }, res1 );
 
-        const res2 = gl.lookup('銭湯');
+        const res2 = gl.lookfor('銭湯');
         assert.deepEqual( {
             "type": "FeatureCollection",
             "features": [ ]
@@ -47,10 +47,10 @@ describe('The first test', () => {
 
     });
 
-    // "スイーツ"を含む名称、カテゴリを検索する
-    it('should be lookup sweetsshop.', () => {
-      const gl = new GeoJsonLookup(geojson); 
-      const res1 = gl.lookup('スイーツ');
+    // "スイーツ"を含む項目があるfeatureを検索する
+    it('should be lookfor features that include "sweets".', () => {
+      const gl = new GeoJsonlookfor(geojson); 
+      const res1 = gl.lookfor('スイーツ');
       assert.deepEqual( {
           "type": "FeatureCollection",
           "features": [
@@ -118,10 +118,10 @@ describe('The first test', () => {
       }, res1 );
     });
 
-    // "さいたま市"を含む住所を検索する
-    it('should be lookup sweetsshop.', () => {
-      const gl = new GeoJsonLookup(geojson); 
-      const res1 = gl.lookup('さいたま市');
+    // "さいたま市"を含むfeatureを検索する
+    it('should be lookfor features include "さいたま市".', () => {
+      const gl = new GeoJsonlookfor(geojson); 
+      const res1 = gl.lookfor('さいたま市');
       assert.deepEqual( {
           "type": "FeatureCollection",
           "features": [
@@ -143,7 +143,7 @@ describe('The first test', () => {
           ]
       }, res1 );
 
-      const res2 = gl.lookup('那覇市');
+      const res2 = gl.lookfor('那覇市');
       assert.deepEqual( {
           "type": "FeatureCollection",
           "features": []
