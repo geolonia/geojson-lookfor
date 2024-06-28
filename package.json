@@ -1,0 +1,25 @@
+{
+  "name": "@geolonia/geojson-lookup",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "mocha -r ts-node/register test/*.ts",
+    "test:watch": "npm test -- --watch --watch-files src/**/*.ts --watch-files test/**/*.ts"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/chai": "^4.3.5",
+    "@types/jest": "^29.5.12",
+    "@types/mocha": "^10.0.1",
+    "chai": "^4.3.8",
+    "mocha": "^10.2.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}

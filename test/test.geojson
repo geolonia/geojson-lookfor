@@ -1,0 +1,62 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "スイーツショップ",
+          "address": "△△"
+        },
+        "geometry": {
+          "coordinates": [
+            139.517720985072,
+            35.99865685174926
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "樋口書店",
+          "address": "△△"
+        },
+        "geometry": {
+          "coordinates": [
+            139.3008590099202,
+            35.97501042924834
+          ],
+          "type": "Point"
+        },
+        "id": 1
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "菓子店",
+          "address": "△△"
+        },
+        "geometry": {
+          "coordinates": [
+            139.5371783066526,
+            35.941979468748585
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "電気店",
+          "address": "△△"
+        },
+        "geometry": {
+          "coordinates": [
+            139.65389691240966,
+            35.933316420262145
+          ],
+          "type": "Point"
+        }
+      }
+    ]
+}
