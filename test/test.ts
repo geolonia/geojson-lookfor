@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import * as fs from 'fs';
 import GeoJsonlookfor from '../src/index';
 
-// このファイルのディレクトリ名を取得する
+// testデータのディレクトリ名を取得する
 const geojson = JSON.parse(fs.readFileSync(`${__dirname}/test.geojson`, 'utf8'));
 
 describe('The first test', () => {
