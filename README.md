@@ -3,7 +3,7 @@ GeoJSON中にある地物(feature)を任意のキーワードで検索し、マ�
 
 ## 基本的な使い方
 1. lookfor関数に文字列を渡す
-→ 引数に指定した文字列に対応する`properties`を持つfeatureを返します。
+    - 引数に指定した文字列に対応する`properties`を持つfeatureを返します。
 ```typescript
 const gl = new GeoJsonlookfor(geojson); 
 const res = gl.lookfor('さいたま市');
