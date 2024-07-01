@@ -5,6 +5,8 @@ import GeoJsonlookfor from '../src/index';
 
 // testデータのディレクトリ名を取得する
 const geojson = JSON.parse(fs.readFileSync(`${__dirname}/test.geojson`, 'utf8'));
+const csv = fs.readFileSync(`${__dirname}/test.csv`, 'utf8');
+const json = JSON.parse(fs.readFileSync(`${__dirname}/test.json`, 'utf8'));
 const pmtile = 'https://cyberjapandata.gsi.go.jp/xyz/optimal_bvmap-v1/optimal_bvmap-v1.pmtiles'
 
 describe('The first test', () => {
@@ -200,8 +202,8 @@ describe('The first test', () => {
 
     });
 
-    // geojson以外を引数として渡す
-    it('data other than geojson as argument', () => {
+    // stringを引数として渡す
+    it('string as argument', () => {
       try {
         const gl = new GeoJsonlookfor(pmtile); 
         const res1 = gl.lookfor('家電').getGeoJSON();
@@ -211,29 +213,14 @@ describe('The first test', () => {
               {
                 "type": "Feature",
                 "properties": {
-                  "name": "パティスリーGeolonia",
-                  "address": "埼玉県上尾市弁財二丁目",
-                  "category": "スイーツ"
+                  "name": "電気店",
+                  "address": "埼玉県さいたま市見沼区大字蓮沼",
+                  "category": "家電"
                 },
                 "geometry": {
                   "coordinates": [
-                    139.57772266590507,
-                    35.97221769999193
-                  ],
-                  "type": "Point"
-                }
-              },
-              {
-                "type": "Feature",
-                "properties": {
-                  "name": "パティスリーぷりこ",
-                  "address": "埼玉県上尾市中分三丁目",
-                  "category": "スイーツ"
-                },
-                "geometry": {
-                  "coordinates": [
-                    139.54952061301026,
-                    35.978737345548765
+                    139.65389691240966,
+                    35.933316420262145
                   ],
                   "type": "Point"
                 }
@@ -241,7 +228,69 @@ describe('The first test', () => {
             ]
         }, res1 );
       }catch(err){
-        console.log(err);
+        console.error(err);
+      }
+
+    });
+
+    // jsonを引数として渡す
+    it('json as argument', () => {
+      try {
+        const gl = new GeoJsonlookfor(json); 
+        const res1 = gl.lookfor('家電').getGeoJSON();
+        assert.deepEqual( {
+            "type": "FeatureCollection",
+            "features": [
+              {
+                "type": "Feature",
+                "properties": {
+                  "name": "電気店",
+                  "address": "埼玉県さいたま市見沼区大字蓮沼",
+                  "category": "家電"
+                },
+                "geometry": {
+                  "coordinates": [
+                    139.65389691240966,
+                    35.933316420262145
+                  ],
+                  "type": "Point"
+                }
+              }
+            ]
+        }, res1 );
+      }catch(err){
+        console.error(err);
+      }
+
+    });
+
+    // csvを引数として渡す
+    it('csv as argument', () => {
+      try {
+        const gl = new GeoJsonlookfor(csv); 
+        const res1 = gl.lookfor('家電').getGeoJSON();
+        assert.deepEqual( {
+            "type": "FeatureCollection",
+            "features": [
+              {
+                "type": "Feature",
+                "properties": {
+                  "name": "電気店",
+                  "address": "埼玉県さいたま市見沼区大字蓮沼",
+                  "category": "家電"
+                },
+                "geometry": {
+                  "coordinates": [
+                    139.65389691240966,
+                    35.933316420262145
+                  ],
+                  "type": "Point"
+                }
+              }
+            ]
+        }, res1 );
+      }catch(err){
+        console.error(err);
       }
 
     });
