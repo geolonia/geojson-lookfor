@@ -16,7 +16,6 @@ export default class GeoJsonlookfor {
                 (feature: any) => JSON.stringify(feature).includes(keyword)
             )
         };
-        console.log(res);
         return res;
     }
     
