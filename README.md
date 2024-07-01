@@ -6,7 +6,7 @@ GeoJSON中にある地物(feature)を任意のキーワードで検索し、マ�
     - 引数に指定した文字列に対応する`properties`を持つfeatureを返します。
 ```typescript
 const gl = new GeoJsonlookfor(geojson); 
-const res = gl.lookfor('さいたま市');
+const res = gl.lookfor('さいたま市').getGeoJSON();
 
 console.log(res);
 
@@ -31,4 +31,7 @@ console.log(res);
 //     ]
 // }
 ```
-
+AND検索も可能です。
+```typescript
+const res = gl.lookfor('スイーツ').lookfor('上尾市').getGeoJSON();
+```
