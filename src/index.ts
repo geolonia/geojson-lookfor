@@ -17,17 +17,27 @@ export default class GeoJsonlookfor {
     }
 
     getGeoJSON() {
-        const features = this.geojson.features
+        
+        try {
+            if (this.geojson === undefined || this.geojson === null || typeof this.geojson !== 'object' || typeof this.geojson === 'string') {
+                throw new Error('Invalid GeoJSON');
+            }
 
-        const res = {
-            "type": "FeatureCollection",
-            "features": features.filter((feature: any) => {
-                return this.keywordArr.every((keyword: string) => {
-                    return JSON.stringify(feature).includes(keyword);
-                });
-            })
-        };
-        return res;
+            const features = this.geojson.features
+
+            const res = {
+                "type": "FeatureCollection",
+                "features": features.filter((feature: any) => {
+                    return this.keywordArr.every((keyword: string) => {
+                        return JSON.stringify(feature).includes(keyword);
+                    });
+                })
+            };
+
+            return res;
+        } catch (err: any) {
+            throw new Error(err.message)
+        }
     }
     
 }

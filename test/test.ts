@@ -2,8 +2,10 @@ import { assert } from 'chai';
 import * as fs from 'fs';
 import GeoJsonlookfor from '../src/index';
 
+
 // testデータのディレクトリ名を取得する
 const geojson = JSON.parse(fs.readFileSync(`${__dirname}/test.geojson`, 'utf8'));
+const pmtile = 'https://cyberjapandata.gsi.go.jp/xyz/optimal_bvmap-v1/optimal_bvmap-v1.pmtiles'
 
 describe('The first test', () => {
     it('is the first test.', () => {
@@ -195,6 +197,52 @@ describe('The first test', () => {
           "type": "FeatureCollection",
           "features": []
       }, res2 );
+
+    });
+
+    // geojson以外を引数として渡す
+    it('data other than geojson as argument', () => {
+      try {
+        const gl = new GeoJsonlookfor(pmtile); 
+        const res1 = gl.lookfor('家電').getGeoJSON();
+        assert.deepEqual( {
+            "type": "FeatureCollection",
+            "features": [
+              {
+                "type": "Feature",
+                "properties": {
+                  "name": "パティスリーGeolonia",
+                  "address": "埼玉県上尾市弁財二丁目",
+                  "category": "スイーツ"
+                },
+                "geometry": {
+                  "coordinates": [
+                    139.57772266590507,
+                    35.97221769999193
+                  ],
+                  "type": "Point"
+                }
+              },
+              {
+                "type": "Feature",
+                "properties": {
+                  "name": "パティスリーぷりこ",
+                  "address": "埼玉県上尾市中分三丁目",
+                  "category": "スイーツ"
+                },
+                "geometry": {
+                  "coordinates": [
+                    139.54952061301026,
+                    35.978737345548765
+                  ],
+                  "type": "Point"
+                }
+              }
+            ]
+        }, res1 );
+      }catch(err){
+        console.log(err);
+      }
 
     });
 
