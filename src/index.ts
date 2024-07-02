@@ -2,24 +2,16 @@
 export default class GeoJsonlookfor {
 
     geojson: any;
-    keywordArr: string[];
-    
     
     constructor(geojson: any) {
         this.geojson = geojson;
-        this.keywordArr = [];
     }
 
     // "keyword"を含む項目があるfeatureを検索する
     lookfor(keyword: string) {
-        this.keywordArr.push(keyword);
-        return this;
-    }
-
-    getGeoJSON() {
         const features = this.geojson.features
 
-        const res = {
+        this.geojson = {
             "type": "FeatureCollection",
             "features": features.filter((feature: any) => {
                 return this.keywordArr.every((keyword: string) => {
@@ -27,7 +19,12 @@ export default class GeoJsonlookfor {
                 });
             })
         };
-        return res;
+        
+        return this;
+    }
+
+    getGeoJSON() {
+        return this.geojson
     }
     
 }
