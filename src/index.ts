@@ -2,42 +2,35 @@
 export default class GeoJsonlookfor {
 
     geojson: any;
-    keywordArr: string[];
-    
     
     constructor(geojson: any) {
         this.geojson = geojson;
-        this.keywordArr = [];
     }
 
     // "keyword"を含む項目があるfeatureを検索する
     lookfor(keyword: string) {
-        this.keywordArr.push(keyword);
-        return this;
+      try {
+          if (this.geojson === undefined || this.geojson === null || typeof this.geojson !== 'object' || typeof this.geojson === 'string') {
+              throw new Error('Invalid GeoJSON');
+          }
+          const features = this.geojson.features
+
+          this.geojson = {
+              "type": "FeatureCollection",
+              "features": features.filter((feature: any) => {
+                  return JSON.stringify(feature).includes(keyword);
+              })
+          };
+          
+          return this;
+      } catch (err: any) {
+          throw err
+      }
     }
 
+    // geojsonを返す
     getGeoJSON() {
-        
-        try {
-            if (this.geojson === undefined || this.geojson === null || typeof this.geojson !== 'object' || typeof this.geojson === 'string') {
-                throw new Error('Invalid GeoJSON');
-            }
-
-            const features = this.geojson.features
-
-            const res = {
-                "type": "FeatureCollection",
-                "features": features.filter((feature: any) => {
-                    return this.keywordArr.every((keyword: string) => {
-                        return JSON.stringify(feature).includes(keyword);
-                    });
-                })
-            };
-
-            return res;
-        } catch (err: any) {
-            throw new Error(err.message)
-        }
+        return this.geojson
     }
     
 }
