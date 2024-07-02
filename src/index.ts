@@ -14,9 +14,7 @@ export default class GeoJsonlookfor {
         this.geojson = {
             "type": "FeatureCollection",
             "features": features.filter((feature: any) => {
-                return this.keywordArr.every((keyword: string) => {
-                    return JSON.stringify(feature).includes(keyword);
-                });
+                return JSON.stringify(feature).includes(keyword);
             })
         };
         
