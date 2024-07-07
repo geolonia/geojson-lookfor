@@ -1,5 +1,5 @@
 {
-  "name": "@geolonia/geojson-lookup",
+  "name": "@geolonia/geojson-lookfor",
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
