@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 import * as fs from 'fs';
-import GeoJsonlookfor from '../src/index';
+import { GeoJsonlookfor } from '../src/index';
 
 
 // testデータのディレクトリ名を取得する
