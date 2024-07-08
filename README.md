@@ -82,7 +82,8 @@ const res = GeoJsonlookfor.lookfor('clothing store').getGeoJSON();
 
 console.log(res);
 ```
-```
+```shell
+# result
 {
   type: 'FeatureCollection',
   features: [ 
@@ -111,7 +112,8 @@ const res = GeoJsonlookfor.lookfor('restaurant').lookfor('A').getGeoJSON();
 
 console.log(res);
 ```
-```
+```shell
+# result
 {
   type: 'FeatureCollection',
   features: [
