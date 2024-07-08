@@ -1,37 +1,137 @@
 # geojson-lookfor
-GeoJSON中にある地物(feature)を任意のキーワードで検索し、マッチした地物だけが含まれるGeoJsonを返すnpmモジュールです。
+Quickly search any feature from GeoJSON.
+Can be searched by any keyword.
+This is an npm module that returns GeoJson that only contains geojson that match the keywords.
 
-## 基本的な使い方
-1. lookfor関数に文字列を渡す
-    - 引数に指定した文字列に対応する`properties`を持つfeatureを返します。
+## Usage
+1. Install through npm.
+```shell
+npm i @geolonia/geojson-lookfor
+```
+2. Require the module.
+```javascript
+const gl = require("@geolonia/geojson-lookfor");
+```
+3. Initialize by passing geojson to the GeoJsonlookfor object.
+```javascript
+const GeoJsonlookfor = new gl.GeoJsonlookfor(geojson);
+```
+4. We can look for features with "bakery" in their properties in the following ways.
+```javascript
+GeoJsonlookfor.lookfor('bakery');
+console.log(GeoJsonlookfor.getGeoJSON());
+```
+
+## Example
+1. Look for a feature with "clothing store".
 ```typescript
-const gl = new GeoJsonlookfor(geojson); 
-const res = gl.lookfor('さいたま市').getGeoJSON();
+const gl = require("@geolonia/geojson-lookfor");
+const geojson = {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Bistro A",
+          "address": "sample address",
+          "category": "restaurant"
+        },
+        "geometry": {
+          "coordinates": [
+            139.517720985072,
+            35.99865685174926
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "sample shop",
+          "address": "sample address",
+          "category": "clothing store"
+        },
+        "geometry": {
+          "coordinates": [
+            139.3008590099202,
+            35.97501042924834
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Bistro B",
+          "address": "sample address",
+          "category": "restaurant"
+        },
+        "geometry": {
+          "coordinates": [
+            139.5371783066526,
+            35.941979468748585
+          ],
+          "type": "Point"
+        }
+      }
+    ]
+}
+
+const GeoJsonlookfor = new gl.GeoJsonlookfor(geojson);
+const res = GeoJsonlookfor.lookfor('clothing store').getGeoJSON();
 
 console.log(res);
-
-// {
-//     "type": "FeatureCollection",
-//     "features": [
-//     {
-//         "type": "Feature",
-//         "properties": {
-//         "name": "電気店",
-//         "address": "埼玉県さいたま市見沼区大字蓮沼",
-//         "category": "家電"
-//         },
-//         "geometry": {
-//         "coordinates": [
-//             139.65389691240966,
-//             35.933316420262145
-//         ],
-//         "type": "Point"
-//         }
-//     }
-//     ]
-// }
 ```
-AND検索も可能です。
+```shell
+# result
+{
+  type: 'FeatureCollection',
+  features: [ 
+    {
+        "type": "Feature",
+        "properties": {
+            "name": "sample shop",
+            "address": "sample address",
+            "category": "clothing store"
+        },
+        "geometry": {
+            "coordinates": [
+            139.3008590099202,
+            35.97501042924834
+            ],
+            "type": "Point"
+        }
+    }
+  ]
+}
+```
+
+2. Look for a feature with "restaurant" and "A".
 ```typescript
-const res = gl.lookfor('スイーツ').lookfor('上尾市').getGeoJSON();
+const res = GeoJsonlookfor.lookfor('restaurant').lookfor('A').getGeoJSON();
+
+console.log(res);
+```
+```shell
+# result
+{
+  type: 'FeatureCollection',
+  features: [
+    {
+        type: 'Feature',
+        properties: {
+            name: 'Bistro A',
+            address: 'sample address',
+            category: 'restaurant'
+        },
+        geometry: {
+            coordinates: [ 
+                139.517720985072, 
+                35.99865685174926 
+            ],
+            type: 'Point'
+        }
+    }
+  ]
+}
 ```
