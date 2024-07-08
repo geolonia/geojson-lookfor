@@ -1,5 +1,5 @@
 
-export default class GeoJsonlookfor {
+export class GeoJsonlookfor {
 
   geojson: any;
   
