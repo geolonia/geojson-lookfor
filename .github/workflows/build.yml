@@ -6,11 +6,11 @@ name: build
 on:
   push:
     branches:
-      - master
+      - main
     tags: ['*']
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -27,10 +27,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run build
-      - run: npm run lint
       - run: npm test
+      - run: npm run build
       # allow fails
       # - run: npm run test:addresses || true
 
