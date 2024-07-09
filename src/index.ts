@@ -29,8 +29,18 @@ export class GeoJsonlookfor {
   }
 
   // geojsonを返す
-  getGeoJSON() {
+  getGeoJSON(number?: number) {
+    if (number !== undefined) {
+      this.geojson.features = this.geojson.features.slice(0, number);
+    }
     return this.geojson
+  }
+
+  /* *******************
+   * featureの件数を取得する
+   * *******************/ 
+  getFeatureCount() {
+    return this.geojson.features.length;
   }
     
 }
