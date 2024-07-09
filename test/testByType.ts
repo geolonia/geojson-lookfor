@@ -14,8 +14,8 @@ describe('AND search test', () => {
 
   // AND検索をする（スイーツショップかつ、上尾市）
   it('should be lookfor features include "スイーツ" and "上尾市".', () => {
-    const gl = new GeoJsonlookfor(geojson); 
-    const res1 = gl.lookfor('スイーツ').lookfor('上尾市').getGeoJSON();
+    const lookfor = new GeoJsonlookfor(geojson); 
+    const res1 = lookfor.lookfor('スイーツ').lookfor('上尾市').getGeoJSON();
     assert.deepEqual( {
         "type": "FeatureCollection",
         "features": [
@@ -52,7 +52,7 @@ describe('AND search test', () => {
         ]
     }, res1 );
 
-    const res2 = gl.lookfor('スイーツ').lookfor('那覇市').getGeoJSON();
+    const res2 = lookfor.lookfor('スイーツ').lookfor('那覇市').getGeoJSON();
     assert.deepEqual( {
         "type": "FeatureCollection",
         "features": []
@@ -62,8 +62,8 @@ describe('AND search test', () => {
 
   // AND検索をする（スイーツかつ、桶川市）
   it('should be lookfor features include "スイーツ" and "桶川市".', () => {
-    const gl = new GeoJsonlookfor(geojson); 
-    const res1 = gl.andMatch(['スイーツ', '桶川市']).getGeoJSON();
+    const lookfor = new GeoJsonlookfor(geojson); 
+    const res1 = lookfor.andMatch(['スイーツ', '桶川市']).getGeoJSON();
     assert.deepEqual( {
         "type": "FeatureCollection",
         "features": [
@@ -85,13 +85,13 @@ describe('AND search test', () => {
         ]
     }, res1 );
 
-    const res2 = gl.andMatch(['高層ビル', '桶川市']).getGeoJSON();
+    const res2 = lookfor.andMatch(['高層ビル', '桶川市']).getGeoJSON();
     assert.deepEqual( {
         "type": "FeatureCollection",
         "features": []
     }, res2 );
 
-    const res3 = gl.andMatch(['ホテル', '沖縄市']).getGeoJSON();
+    const res3 = lookfor.andMatch(['ホテル', '沖縄市']).getGeoJSON();
     assert.deepEqual( {
         "type": "FeatureCollection",
         "features": []
@@ -106,8 +106,8 @@ describe('AND search test', () => {
 describe('OR search test', () => {
   // OR検索をする（書店または、カフェ）
   it('should be lookfor features include "書店" or "カフェ".', () => {
-    const gl = new GeoJsonlookfor(geojson); 
-    const res1 = gl.orMatch(['書店', 'カフェ']).getGeoJSON();
+    const lookfor = new GeoJsonlookfor(geojson); 
+    const res1 = lookfor.orMatch(['書店', 'カフェ']).getGeoJSON();
     assert.deepEqual( {
         "type": "FeatureCollection",
         "features": [
@@ -144,7 +144,7 @@ describe('OR search test', () => {
         ]
     }, res1 );
 
-    const res2 = gl.orMatch(['高層ビル', 'カフェ']).getGeoJSON();
+    const res2 = lookfor.orMatch(['高層ビル', 'カフェ']).getGeoJSON();
     assert.deepEqual( {
         "type": "FeatureCollection",
         "features": [
@@ -166,7 +166,7 @@ describe('OR search test', () => {
         ]
     }, res2 );
 
-    const res3 = gl.orMatch(['ホテル', 'ビーチ']).getGeoJSON();
+    const res3 = lookfor.orMatch(['ホテル', 'ビーチ']).getGeoJSON();
     assert.deepEqual( {
         "type": "FeatureCollection",
         "features": []
@@ -183,8 +183,8 @@ describe('OR search test', () => {
 describe('NOT search test', () => {
   // NOT検索をする（スイーツではない）
   it('should be look for features other than "スイーツ".', () => {
-    const gl = new GeoJsonlookfor(geojson); 
-    const res = gl.notMatch('スイーツ').getGeoJSON();
+    const lookfor = new GeoJsonlookfor(geojson); 
+    const res = lookfor.notMatch('スイーツ').getGeoJSON();
     assert.deepEqual( {
         "type": "FeatureCollection",
         "features": [
@@ -239,8 +239,8 @@ describe('NOT search test', () => {
 
   // NOT検索をする（スイーツまたは書店ではない）
   it('should be look for features other than "スイーツ" or "書店".', () => {
-    const gl = new GeoJsonlookfor(geojson); 
-    const res = gl.notMatch(['スイーツ', '書店']).getGeoJSON();
+    const lookfor = new GeoJsonlookfor(geojson); 
+    const res = lookfor.notMatch(['スイーツ', '書店']).getGeoJSON();
     assert.deepEqual( {
         "type": "FeatureCollection",
         "features": [
