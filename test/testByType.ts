@@ -15,7 +15,7 @@ describe('AND search test', () => {
   // AND検索をする（スイーツショップかつ、上尾市）
   it('should be lookfor features include "スイーツ" and "上尾市".', () => {
     const lookfor = new GeoJsonlookfor(geojson); 
-    const res1 = lookfor.lookfor('スイーツ').lookfor('上尾市').getGeoJSON();
+    const res1 = lookfor.match('スイーツ').match('上尾市').getGeoJSON();
     assert.deepEqual( {
         "type": "FeatureCollection",
         "features": [
@@ -52,7 +52,7 @@ describe('AND search test', () => {
         ]
     }, res1 );
 
-    const res2 = lookfor.lookfor('スイーツ').lookfor('那覇市').getGeoJSON();
+    const res2 = lookfor.match('スイーツ').match('那覇市').getGeoJSON();
     assert.deepEqual( {
         "type": "FeatureCollection",
         "features": []

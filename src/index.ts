@@ -10,7 +10,7 @@ export class GeoJsonlookfor {
   /* *****************
    * "keyword"を含む項目があるfeatureを検索する 
    * *****************/
-  lookfor(keyword: string) {
+  match(keyword: string) {
     try {
       if (this.geojson === undefined || this.geojson === null || typeof this.geojson !== 'object' || typeof this.geojson === 'string') {
         throw new Error('Invalid GeoJSON');
