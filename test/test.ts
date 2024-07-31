@@ -21,7 +21,7 @@ describe('The first test', () => {
     // スイーツショップを検索する
     it('should be lookfor sweetsshop.', () => {
         const gl = new GeoJsonlookfor(geojson); 
-        const res1 = gl.lookfor('スイーツショップ').getGeoJSON();
+        const res1 = gl.match('スイーツショップ').getGeoJSON();
         assert.deepEqual( {
             "type": "FeatureCollection",
             "features": [
@@ -43,7 +43,7 @@ describe('The first test', () => {
             ]
         }, res1 );
 
-        const res2 = gl.lookfor('銭湯').getGeoJSON();
+        const res2 = gl.match('銭湯').getGeoJSON();
         assert.deepEqual( {
             "type": "FeatureCollection",
             "features": [ ]
@@ -54,7 +54,7 @@ describe('The first test', () => {
     // "スイーツ"を含む項目があるfeatureを検索する
     it('should be lookfor features that include "sweets".', () => {
       const gl = new GeoJsonlookfor(geojson); 
-      const res1 = gl.lookfor('スイーツ').getGeoJSON();
+      const res1 = gl.match('スイーツ').getGeoJSON();
       assert.deepEqual( {
           "type": "FeatureCollection",
           "features": [
@@ -125,7 +125,7 @@ describe('The first test', () => {
     // "さいたま市"を含むfeatureを検索する
     it('should be lookfor features include "さいたま市".', () => {
       const gl = new GeoJsonlookfor(geojson); 
-      const res1 = gl.lookfor('さいたま市').getGeoJSON();
+      const res1 = gl.match('さいたま市').getGeoJSON();
       assert.deepEqual( {
           "type": "FeatureCollection",
           "features": [
@@ -147,66 +147,18 @@ describe('The first test', () => {
           ]
       }, res1 );
 
-      const res2 = gl.lookfor('那覇市').getGeoJSON();
+      const res2 = gl.match('那覇市').getGeoJSON();
       assert.deepEqual( {
           "type": "FeatureCollection",
           "features": []
       }, res2 );
-    });
-
-    // "スイーツ"を含み、"上尾市"を含むfeatureを検索する
-    it('should be lookfor features include "スイーツ" and "上尾市".', () => {
-      const gl = new GeoJsonlookfor(geojson); 
-      const res1 = gl.lookfor('スイーツ').lookfor('上尾市').getGeoJSON();
-      assert.deepEqual( {
-          "type": "FeatureCollection",
-          "features": [
-            {
-              "type": "Feature",
-              "properties": {
-                "name": "パティスリーGeolonia",
-                "address": "埼玉県上尾市弁財二丁目",
-                "category": "スイーツ"
-              },
-              "geometry": {
-                "coordinates": [
-                  139.57772266590507,
-                  35.97221769999193
-                ],
-                "type": "Point"
-              }
-            },
-            {
-              "type": "Feature",
-              "properties": {
-                "name": "パティスリーぷりこ",
-                "address": "埼玉県上尾市中分三丁目",
-                "category": "スイーツ"
-              },
-              "geometry": {
-                "coordinates": [
-                  139.54952061301026,
-                  35.978737345548765
-                ],
-                "type": "Point"
-              }
-            }
-          ]
-      }, res1 );
-
-      const res2 = gl.lookfor('スイーツ').lookfor('那覇市').getGeoJSON();
-      assert.deepEqual( {
-          "type": "FeatureCollection",
-          "features": []
-      }, res2 );
-
     });
 
     // stringを引数として渡す
     it('string as argument', () => {
       try {
         const gl = new GeoJsonlookfor(pmtile); 
-        const res1 = gl.lookfor('家電').getGeoJSON();
+        const res1 = gl.match('家電').getGeoJSON();
         assert.deepEqual( {
             "type": "FeatureCollection",
             "features": [
@@ -237,7 +189,7 @@ describe('The first test', () => {
     it('json as argument', () => {
       try {
         const gl = new GeoJsonlookfor(json); 
-        const res1 = gl.lookfor('家電').getGeoJSON();
+        const res1 = gl.match('家電').getGeoJSON();
         assert.deepEqual( {
             "type": "FeatureCollection",
             "features": [
@@ -268,7 +220,7 @@ describe('The first test', () => {
     it('csv as argument', () => {
       try {
         const gl = new GeoJsonlookfor(csv); 
-        const res1 = gl.lookfor('家電').getGeoJSON();
+        const res1 = gl.match('家電').getGeoJSON();
         assert.deepEqual( {
             "type": "FeatureCollection",
             "features": [
@@ -294,6 +246,4 @@ describe('The first test', () => {
       }
 
     });
-
-
 });

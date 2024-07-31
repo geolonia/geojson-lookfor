@@ -29,8 +29,7 @@
             35.97501042924834
           ],
           "type": "Point"
-        },
-        "id": 1
+        }
       },
       {
         "type": "Feature",
@@ -73,6 +72,21 @@
           "coordinates": [
             139.57772266590507,
             35.97221769999193
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "オーガニックカフェ GEO",
+          "address": "埼玉県入間郡越生町大谷",
+          "category": "カフェ"
+        },
+        "geometry": {
+          "coordinates": [
+            139.30085900992,
+            35.975010429248
           ],
           "type": "Point"
         }
