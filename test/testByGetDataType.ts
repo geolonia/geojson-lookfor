@@ -14,14 +14,14 @@ describe('Test by return value', () => {
     // 件数を取得する
     it('Get the number of cases', () => {
         const gl = new GeoJsonlookfor(geojson); 
-        const res = gl.lookfor('スイーツ').getFeatureCount();
+        const res = gl.match('スイーツ').getFeatureCount();
         assert.deepEqual(4, res);
     });
 
     // 指定した件数分featureを取得する
     it('Get the number of cases', () => {
         const gl = new GeoJsonlookfor(geojson); 
-        const res = gl.lookfor('スイーツ').getGeoJSON(2);
+        const res = gl.match('スイーツ').getGeoJSON(2);
         assert.deepEqual({
             "type": "FeatureCollection",
             "features": [
