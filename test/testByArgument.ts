@@ -34,11 +34,36 @@ describe('Passing an object as a condition to search test.', () => {
             ]
         }, res1 );
 
-        const res2 = gl.orMatch({ 'tel': '090-XXXX-XXXX' }).getGeoJSON();
+
+
+        const res2 = gl.andMatch({ 'name': 'スイーツショップ' }).getGeoJSON();
+        assert.deepEqual( {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "properties": {
+                      "name": "スイーツショップ",
+                      "address": "埼玉県桶川市川田谷",
+                      "category": "スイーツ"
+                    },
+                    "geometry": {
+                      "coordinates": [
+                        139.517720985072,
+                        35.99865685174926
+                      ],
+                      "type": "Point"
+                    }
+                  }
+            ]
+        }, res2 );
+
+
+        const res3 = gl.orMatch({ 'name': 'レトロ' }).getGeoJSON();
         assert.deepEqual( {
             "type": "FeatureCollection",
             "features": [ ]
-        }, res2 );
+        }, res3 );
   
     });
 
@@ -94,6 +119,34 @@ describe('Passing an object as a condition to search test.', () => {
                   "type": "Point"
                 }
               }
+            ]
+        }, res );
+  
+    });
+
+
+    it('should be lookfor features with the name property containing "パティスリー" and address property containing "弁財二丁目".', () => {
+        const gl = new GeoJsonlookfor(geojson); 
+  
+        const res = gl.andMatch({ 'name': 'パティスリー', 'address': '弁財二丁目' }).getGeoJSON();
+        assert.deepEqual( {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                  "type": "Feature",
+                  "properties": {
+                    "name": "パティスリーGeolonia",
+                    "address": "埼玉県上尾市弁財二丁目",
+                    "category": "スイーツ"
+                  },
+                  "geometry": {
+                    "coordinates": [
+                      139.57772266590507,
+                      35.97221769999193
+                    ],
+                    "type": "Point"
+                  }
+                }
             ]
         }, res );
   

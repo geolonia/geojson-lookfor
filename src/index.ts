@@ -62,7 +62,7 @@ export class GeoJsonlookfor {
   /* *****************
    * "keywords"配列内の文字列でAND検索を行う 
    * *****************/
-  andMatch(keywords: string[]) {
+  andMatch(keywords: string[] | { [key: string]: any }) {
     try {
       if (this.geojson === undefined || this.geojson === null || typeof this.geojson !== 'object' || typeof this.geojson === 'string') {
         throw new Error('Invalid GeoJSON');
@@ -72,7 +72,13 @@ export class GeoJsonlookfor {
       this.geojson = {
         "type": "FeatureCollection",
         "features": features.filter((feature: any) => {
-          return keywords.every((keyword) => JSON.stringify(feature).includes(keyword));
+          if(Array.isArray(keywords)){
+            return (keywords as string[]).every((keyword) => JSON.stringify(feature).includes(keyword));
+          } else {
+            return Object.keys(keywords).every((key) => {
+              return key in feature.properties && feature.properties[key].includes((keywords as any)[key])
+            });
+          }
         })
       };
       
