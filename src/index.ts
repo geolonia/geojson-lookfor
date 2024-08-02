@@ -10,7 +10,7 @@ export class GeoJsonlookfor {
   /* *****************
    * "keyword"を含む項目があるfeatureを検索する 
    * *****************/
-  match(keyword: string) {
+  match(keyword: string, geometryType?: 'Point' | 'MultiPoint' | 'LineString' | 'MultiLineString' | 'Polygon' | 'MultiPolygon') {
     try {
       if (this.geojson === undefined || this.geojson === null || typeof this.geojson !== 'object' || typeof this.geojson === 'string') {
         throw new Error('Invalid GeoJSON');
@@ -31,9 +31,9 @@ export class GeoJsonlookfor {
   }
 
   /* *****************
-   * "keywords"配列内の文字列で検索を行う 
+   * "keywords"配列内の文字列でOR検索を行う
    * *****************/
-  orMatch(keywords: string[]) {
+  orMatch(keywords: string[] | { [key: string]: any }) {
     try {
       if (this.geojson === undefined || this.geojson === null || typeof this.geojson !== 'object' || typeof this.geojson === 'string') {
         throw new Error('Invalid GeoJSON');
@@ -43,7 +43,13 @@ export class GeoJsonlookfor {
       this.geojson = {
         "type": "FeatureCollection",
         "features": features.filter((feature: any) => {
-          return keywords.some((keyword) => JSON.stringify(feature).includes(keyword));
+          if(Array.isArray(keywords)){
+            return (keywords as string[]).some((keyword) => JSON.stringify(feature).includes(keyword));
+          } else {
+            return Object.keys(keywords).some((key) => {
+              return key in feature.properties && feature.properties[key].includes((keywords as any)[key])
+            });
+          }
         })
       };
       
@@ -53,6 +59,9 @@ export class GeoJsonlookfor {
     }
   }
 
+  /* *****************
+   * "keywords"配列内の文字列でAND検索を行う 
+   * *****************/
   andMatch(keywords: string[]) {
     try {
       if (this.geojson === undefined || this.geojson === null || typeof this.geojson !== 'object' || typeof this.geojson === 'string') {
@@ -75,6 +84,7 @@ export class GeoJsonlookfor {
 
   /* *****************
    * "keyword"を含まないfeatureを検索する
+    TODO：ここでプロパティの値を指定して検索できるようにする
    * *****************/
   notMatch(keyword: string | string[]) {
     try {
@@ -97,6 +107,7 @@ export class GeoJsonlookfor {
       throw new Error(err);
     }
   }
+
 
 
   /* *****************
