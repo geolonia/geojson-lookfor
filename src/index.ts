@@ -89,10 +89,9 @@ export class GeoJsonlookfor {
   }
 
   /* *****************
-   * "keyword"を含まないfeatureを検索する
-    TODO：ここでプロパティの値を指定して検索できるようにする
+   * "keyword"を含まないfeatureをNOT検索する
    * *****************/
-  notMatch(keyword: string | string[]) {
+  notMatch(keywords: string | string[] | { [key: string]: any }) {
     try {
       if (this.geojson === undefined || this.geojson === null || typeof this.geojson !== 'object' || typeof this.geojson === 'string') {
         throw new Error('Invalid GeoJSON');
@@ -102,9 +101,14 @@ export class GeoJsonlookfor {
       this.geojson = {
         "type": "FeatureCollection",
         "features": features.filter((feature: any) => {
-          const keywords = Array.isArray(keyword) ? keyword : [keyword];
-          // return !JSON.stringify(feature).includes(keyword);
-          return !keywords.some((keyword) => JSON.stringify(feature).includes(keyword));
+          if(Array.isArray(keywords) || typeof keywords === 'string'){
+            const keywordArr = Array.isArray(keywords) ? keywords : [keywords];
+            return !keywordArr.some((keyword) => JSON.stringify(feature).includes(keyword));
+          } else {
+            return !Object.keys(keywords).some((key) => {
+              return key in feature.properties && feature.properties[key].includes((keywords as any)[key])
+            });
+          }
         })
       };
       
