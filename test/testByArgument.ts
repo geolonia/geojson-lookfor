@@ -40,7 +40,12 @@ describe('Passing an object as a condition to search test.', () => {
             "features": [ ]
         }, res2 );
   
-        const res3 = gl.orMatch({ 'name': 'パティスリー', 'address': 'さいたま市' }).getGeoJSON();
+    });
+
+    it('should be lookfor features with the name property containing "パティスリー" or address property containing "さいたま市".', () => {
+        const gl = new GeoJsonlookfor(geojson); 
+  
+        const res = gl.orMatch({ 'name': 'パティスリー', 'address': 'さいたま市' }).getGeoJSON();
         assert.deepEqual( {
             "type": "FeatureCollection",
             "features": [
@@ -90,7 +95,7 @@ describe('Passing an object as a condition to search test.', () => {
                 }
               }
             ]
-        }, res3 );
+        }, res );
   
     });
   
