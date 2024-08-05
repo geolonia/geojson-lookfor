@@ -11,7 +11,7 @@
     "node": ">=22.0.0"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "description": "",
   "devDependencies": {
     "@types/chai": "^4.3.5",
