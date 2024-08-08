@@ -18,7 +18,7 @@ const GeoJsonlookfor = new gl.GeoJsonlookfor(geojson);
 ```
 4. We can look for features with "bakery" in their properties in the following ways.
 ```javascript
-GeoJsonlookfor.lookfor('bakery');
+GeoJsonlookfor.match('bakery');
 console.log(GeoJsonlookfor.getGeoJSON());
 ```
 
@@ -78,7 +78,7 @@ const geojson = {
 }
 
 const GeoJsonlookfor = new gl.GeoJsonlookfor(geojson);
-const res = GeoJsonlookfor.lookfor('clothing store').getGeoJSON();
+const res = GeoJsonlookfor.match('clothing store').getGeoJSON();
 
 console.log(res);
 ```
@@ -108,7 +108,7 @@ console.log(res);
 
 2. Look for a feature with "restaurant" and "A".
 ```typescript
-const res = GeoJsonlookfor.lookfor('restaurant').lookfor('A').getGeoJSON();
+const res = GeoJsonlookfor.match('restaurant').match('A').getGeoJSON();
 
 console.log(res);
 ```
