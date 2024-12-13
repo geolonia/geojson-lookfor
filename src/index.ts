@@ -20,7 +20,7 @@ export class GeoJsonlookfor {
       this.geojson = {
         "type": "FeatureCollection",
         "features": features.filter((feature: any) => {
-          return JSON.stringify(feature).includes(keyword);
+          return JSON.stringify(feature.properties).includes(keyword);
         })
       };
       
@@ -44,7 +44,7 @@ export class GeoJsonlookfor {
         "type": "FeatureCollection",
         "features": features.filter((feature: any) => {
           if(Array.isArray(keywords)){
-            return (keywords as string[]).some((keyword) => JSON.stringify(feature).includes(keyword));
+            return (keywords as string[]).some((keyword) => JSON.stringify(feature.properties).includes(keyword));
           } else {
             return Object.keys(keywords).some((key) => {
               return key in feature.properties && feature.properties[key].includes((keywords as any)[key])
@@ -73,7 +73,7 @@ export class GeoJsonlookfor {
         "type": "FeatureCollection",
         "features": features.filter((feature: any) => {
           if(Array.isArray(keywords)){
-            return (keywords as string[]).every((keyword) => JSON.stringify(feature).includes(keyword));
+            return (keywords as string[]).every((keyword) => JSON.stringify(feature.properties).includes(keyword));
           } else {
             return Object.keys(keywords).every((key) => {
               return key in feature.properties && feature.properties[key].includes((keywords as any)[key])
@@ -103,7 +103,7 @@ export class GeoJsonlookfor {
         "features": features.filter((feature: any) => {
           if(Array.isArray(keywords) || typeof keywords === 'string'){
             const keywordArr = Array.isArray(keywords) ? keywords : [keywords];
-            return !keywordArr.some((keyword) => JSON.stringify(feature).includes(keyword));
+            return !keywordArr.some((keyword) => JSON.stringify(feature.properties).includes(keyword));
           } else {
             return !Object.keys(keywords).some((key) => {
               return key in feature.properties && feature.properties[key].includes((keywords as any)[key])
