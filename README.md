@@ -22,6 +22,16 @@ GeoJsonlookfor.match('bakery');
 console.log(GeoJsonlookfor.getGeoJSON());
 ```
 
+When importing:
+```javascript
+import { GeoJsonlookfor } from '@geolonia/geojson-lookfor';
+
+const gl = new GeoJsonlookfor(geojson);
+const result = gl.match(keyword).getGeoJSON();
+
+console.log(result);
+```
+
 ## Example
 1. Look for a feature with "clothing store".
 ```typescript
