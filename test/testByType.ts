@@ -72,7 +72,7 @@ describe('AND search test', () => {
             "properties": {
               "name": "スイーツショップ",
               "address": "埼玉県桶川市川田谷",
-              "category": "スイーツ"
+              "category": "デザート"
             },
             "geometry": {
               "coordinates": [

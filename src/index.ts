@@ -10,18 +10,33 @@ export class GeoJsonlookfor {
   /* *****************
    * "keyword"を含む項目があるfeatureを検索する 
    * *****************/
-  match(keyword: string, geometryType?: 'Point' | 'MultiPoint' | 'LineString' | 'MultiLineString' | 'Polygon' | 'MultiPolygon') {
+  match(
+    keyword: string, 
+    options?: {
+      geometryType?: 'Point' | 'MultiPoint' | 'LineString' | 'MultiLineString' | 'Polygon' | 'MultiPolygon',
+      excludeKeys?: string[],
+    }
+  ) {
     try {
       if (this.geojson === undefined || this.geojson === null || typeof this.geojson !== 'object' || typeof this.geojson === 'string') {
         throw new Error('Invalid GeoJSON');
       }
       const features = this.geojson.features;
 
+      const { geometryType, excludeKeys } = options || {};
+
       this.geojson = {
-        "type": "FeatureCollection",
-        "features": features.filter((feature: any) => {
-          return JSON.stringify(feature.properties).includes(keyword);
-        })
+        type: 'FeatureCollection',
+        features: features.filter((feature: any) => {
+          // 除外キーが指定されている場合、そのkeyは検索対象から除外
+          const props = { ...feature.properties };
+          if (excludeKeys && Array.isArray(excludeKeys)) {
+            excludeKeys.forEach((key) => {
+              delete props[key];
+            });
+          }
+          return JSON.stringify(props).includes(keyword);
+        }),
       };
       
       return this;
