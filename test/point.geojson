@@ -1,0 +1,101 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "A" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [139.5, 35.9]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "B" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [139.7, 35.7]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "C" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [139.78, 35.79]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "D" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [139.6, 35.8]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "E" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [138.6, 35.8]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "F" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [138.5, 35.7],
+            [138.7, 35.7],
+            [138.7, 35.9],
+            [138.5, 35.9],
+            [138.5, 35.7]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "G" },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [139.4, 35.8],
+          [139.5, 35.85],
+          [139.6, 35.8]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "H" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [139.3, 35.7],
+            [139.4, 35.7],
+            [139.4, 35.8],
+            [139.3, 35.8],
+            [139.3, 35.7]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "I" },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [138.8, 35.6],
+          [138.9, 35.7],
+          [139.0, 35.8]
+        ]
+      }
+    }
+  ]
+}

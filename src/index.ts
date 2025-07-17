@@ -15,30 +15,61 @@ export class GeoJsonlookfor {
     options?: {
       geometryType?: 'Point' | 'MultiPoint' | 'LineString' | 'MultiLineString' | 'Polygon' | 'MultiPolygon',
       excludeKeys?: string[],
+      center?: [number, number], // [lng, lat]
     }
   ) {
     try {
-      if (this.geojson === undefined || this.geojson === null || typeof this.geojson !== 'object' || typeof this.geojson === 'string') {
+      if (
+        this.geojson === undefined ||
+        this.geojson === null ||
+        typeof this.geojson !== 'object' ||
+        typeof this.geojson === 'string'
+      ) {
         throw new Error('Invalid GeoJSON');
       }
       const features = this.geojson.features;
+      const { geometryType, excludeKeys, center } = options || {};
 
-      const { geometryType, excludeKeys } = options || {};
+      // フィルタ処理
+      let filtered = features.filter((feature: any) => {
+        if (geometryType && feature.geometry?.type !== geometryType) {
+          return false;
+        }
+        const props = { ...feature.properties };
+        if (excludeKeys && Array.isArray(excludeKeys)) {
+          excludeKeys.forEach((key) => {
+            delete props[key];
+          });
+        }
+        if (keyword === '') {
+          return true;
+        }
+        return JSON.stringify(props).includes(keyword);
+      });
+
+      // centerが指定されていれば距離でソート
+      if (center && Array.isArray(center) && center.length === 2) {
+        filtered = filtered
+          .map((feature: any) => {
+            let coord = feature.geometry?.coordinates;
+            // Point以外は最初の座標を利用
+            if (Array.isArray(coord[0])) {
+              coord = coord[0];
+            }
+            const dist = Math.sqrt(
+              Math.pow(center[0] - coord[0], 2) + Math.pow(center[1] - coord[1], 2)
+            );
+            return { feature, dist };
+          })
+          .sort((a: { dist: number; }, b: { dist: number; }) => a.dist - b.dist)
+          .map((item: { feature: any; }) => item.feature);
+      }
 
       this.geojson = {
         type: 'FeatureCollection',
-        features: features.filter((feature: any) => {
-          // 除外キーが指定されている場合、そのkeyは検索対象から除外
-          const props = { ...feature.properties };
-          if (excludeKeys && Array.isArray(excludeKeys)) {
-            excludeKeys.forEach((key) => {
-              delete props[key];
-            });
-          }
-          return JSON.stringify(props).includes(keyword);
-        }),
+        features: filtered,
       };
-      
+
       return this;
     } catch (err: any) {
       throw new Error(err);
