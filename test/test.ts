@@ -307,4 +307,63 @@ describe('The first test', () => {
         res
       );
     });
+
+    it('centerで指定した緯度経度に近い順にソートされる', () => {
+      // 2点の座標が異なるPointを持つgeojsonを用意
+      const geojsonForSort = {
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            properties: { name: "A" },
+            geometry: {
+              type: "Point",
+              coordinates: [139.5, 35.9]
+            }
+          },
+          {
+            type: "Feature",
+            properties: { name: "B" },
+            geometry: {
+              type: "Point",
+              coordinates: [139.7, 35.7]
+            }
+          }
+        ]
+      };
+
+      // [139.6, 35.8]に近い順に並ぶかテスト
+      const gl = new GeoJsonlookfor(geojsonForSort);
+      const res = gl.match('', { center: [139.6, 35.8] }).getGeoJSON();
+
+      assert.deepEqual(
+        res,
+        {
+          "type":"FeatureCollection",
+          "features":[
+            {
+              "type":"Feature",
+              "properties": {
+                "name":"B"
+              },
+              "geometry": {
+                "type":"Point",
+                "coordinates":[139.7,35.7]
+              }
+            },
+            {
+              "type":"Feature",
+              "properties": {
+                "name":"A"
+              },
+              "geometry": {
+                "type":"Point",
+                "coordinates":[139.5,35.9]
+              }
+            }
+          ]
+        }
+      );
+    });
+
 });
