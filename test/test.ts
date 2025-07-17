@@ -307,4 +307,30 @@ describe('The first test', () => {
         res
       );
     });
+
+    // geometryTypeを指定して検索するテスト
+    it('geometryTypeで指定したジオメトリタイプのみを検索対象にできる', () => {
+      const allTypesGeojson = JSON.parse(fs.readFileSync(`${__dirname}/all-types-sample.geojson`, 'utf8'));
+      const gl = new GeoJsonlookfor(allTypesGeojson);
+      // "A"を含み、geometry.typeが"Point"のfeatureのみを検索
+      const res = gl.match('A', { geometryType: 'Point' }).getGeoJSON();
+      // 期待されるfeatures（全てgeometry.typeが"Point"）
+      assert.deepEqual(
+        {
+          "type": "FeatureCollection",
+          "features": [
+            {
+              "type": "Feature",
+              "properties": { "name": "ポイントA" },
+              "geometry": {
+                "type": "Point",
+                "coordinates": [139.7, 35.7]
+              }
+            }
+          ]
+        },
+        res
+      );
+    });
+
 });

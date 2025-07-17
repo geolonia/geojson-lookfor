@@ -18,7 +18,12 @@ export class GeoJsonlookfor {
     }
   ) {
     try {
-      if (this.geojson === undefined || this.geojson === null || typeof this.geojson !== 'object' || typeof this.geojson === 'string') {
+      if (
+        this.geojson === undefined ||
+        this.geojson === null ||
+        typeof this.geojson !== 'object' ||
+        typeof this.geojson === 'string'
+      ) {
         throw new Error('Invalid GeoJSON');
       }
       const features = this.geojson.features;
@@ -28,12 +33,20 @@ export class GeoJsonlookfor {
       this.geojson = {
         type: 'FeatureCollection',
         features: features.filter((feature: any) => {
+          // geometryTypeでフィルタ
+          if (geometryType && feature.geometry?.type !== geometryType) {
+            return false;
+          }
           // 除外キーが指定されている場合、そのkeyは検索対象から除外
           const props = { ...feature.properties };
           if (excludeKeys && Array.isArray(excludeKeys)) {
             excludeKeys.forEach((key) => {
               delete props[key];
             });
+          }
+          // キーワードが空文字の場合はgeometryTypeのみでフィルタ
+          if (keyword === '') {
+            return true;
           }
           return JSON.stringify(props).includes(keyword);
         }),

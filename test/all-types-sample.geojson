@@ -1,0 +1,103 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "ポイントA" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [139.7, 35.7]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "ポイントB" },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [139.5, 35.9]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "マルチポイントB" },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [139.8, 35.8],
+          [139.81, 35.81]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "ラインC" },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [139.9, 35.9],
+          [139.91, 35.91]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "マルチラインD" },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [139.92, 35.92],
+            [139.93, 35.93]
+          ],
+          [
+            [139.94, 35.94],
+            [139.95, 35.95]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "ポリゴンE" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [139.96, 35.96],
+            [139.97, 35.96],
+            [139.97, 35.97],
+            [139.96, 35.97],
+            [139.96, 35.96]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "マルチポリゴンF" },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [139.98, 35.98],
+              [139.99, 35.98],
+              [139.99, 35.99],
+              [139.98, 35.99],
+              [139.98, 35.98]
+            ]
+          ],
+          [
+            [
+              [140.0, 36.0],
+              [140.01, 36.0],
+              [140.01, 36.01],
+              [140.0, 36.01],
+              [140.0, 36.0]
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
