@@ -146,6 +146,23 @@ console.log(res);
 }
 ```
 
+## Exclude Keys from Search
+
+You can exclude specific property keys from the search by using the `excludeKeys` option in the `match` function.  
+This is useful when you want to ignore certain fields during keyword matching.
+
+### Example
+
+```javascript
+const gl = new GeoJsonlookfor(geojson);
+// Search for features containing "bakery" but ignore the "name" property
+const result = gl.match('bakery', { excludeKeys: ['name'] }).getGeoJSON();
+
+console.log(result);
+```
+
+In this example, even if the `name` property contains "bakery", it will not be considered in the search. Only other properties will be checked for the keyword.
+
 ## Filter by geometryType
 
 You can filter features by their geometry type using the `geometryType` option in the `match` function.  
