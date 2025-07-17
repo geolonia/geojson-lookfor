@@ -162,3 +162,21 @@ console.log(result);
 ```
 
 In this example, even if the `name` property contains "bakery", it will not be considered in the search. Only other properties will be checked for the keyword.
+
+## Filter by geometryType
+
+You can filter features by their geometry type using the `geometryType` option in the `match` function.  
+Only features whose geometry type matches the specified value will be included in the search.
+
+### Example
+
+```javascript
+const gl = new GeoJsonlookfor(geojson);
+// Search only features with geometry.type === 'Point' and containing 'bakery'
+const result = gl.match('bakery', { geometryType: 'Point' }).getGeoJSON();
+
+console.log(result);
+```
+
+Supported geometry types are:  
+`'Point'`, `'MultiPoint'`, `'LineString'`, `'MultiLineString'`, `'Polygon'`, `'MultiPolygon'`
