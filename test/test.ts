@@ -328,6 +328,22 @@ describe('The first test', () => {
               type: "Point",
               coordinates: [139.7, 35.7]
             }
+          },
+          {
+            type: "Feature",
+            properties: { name: "C" },
+            geometry: {
+              type: "Point",
+              coordinates: [139.78, 35.79]
+            }
+          },
+          {
+            type: "Feature",
+            properties: { name: "D" },
+            geometry: {
+              type: "Point",
+              coordinates: [139.6, 35.8]
+            }
           }
         ]
       };
@@ -335,7 +351,7 @@ describe('The first test', () => {
       // [139.6, 35.8]に近い順に並ぶかテスト
       const gl = new GeoJsonlookfor(geojsonForSort);
       const res = gl.match('', { center: [139.6, 35.8] }).getGeoJSON();
-
+      console.log(JSON.stringify(res));
       assert.deepEqual(
         res,
         {
@@ -343,23 +359,23 @@ describe('The first test', () => {
           "features":[
             {
               "type":"Feature",
-              "properties": {
-                "name":"B"
-              },
-              "geometry": {
-                "type":"Point",
-                "coordinates":[139.7,35.7]
-              }
+              "properties":{"name":"D"},
+              "geometry":{"type":"Point","coordinates":[139.6,35.8]}
             },
             {
               "type":"Feature",
-              "properties": {
-                "name":"A"
-              },
-              "geometry": {
-                "type":"Point",
-                "coordinates":[139.5,35.9]
-              }
+              "properties":{"name":"B"},
+              "geometry":{"type":"Point","coordinates":[139.7,35.7]}
+            },
+            {
+              "type":"Feature",
+              "properties":{"name":"A"},
+              "geometry":{"type":"Point","coordinates":[139.5,35.9]}
+            },
+            {
+              "type":"Feature",
+              "properties":{"name":"C"},
+              "geometry":{"type":"Point","coordinates":[139.78,35.79]}
             }
           ]
         }
